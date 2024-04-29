@@ -1,7 +1,7 @@
 const ws = require("ws");
 
 ((ws)=>{
-    const server = new ws.Server({port:8000});
+    const server = new ws.Server({host:"10.131.133.207",port:8000});
 
     const Init = ()=>{
         bindEvent();
@@ -22,8 +22,8 @@ const ws = require("ws");
         console.log("socket close");
     }
 
-    function handleError() {
-        console.log("socket error");
+    function handleError(e) {
+        console.log("socket error",e);
     }
 
     function handleConnection(ws) {
@@ -31,8 +31,12 @@ const ws = require("ws");
         console.log("socket connect");
     }
 
-    function handleMessage(params) {
-        console.log("socket message");
+    function handleMessage(e) {
+        console.log("socket message",e.toString());
+        //处理信息，如果是聊天室可进行广播
+        server.clients.forEach(c =>{
+            c.send(e.toString());
+        });
     }
 
     Init();
