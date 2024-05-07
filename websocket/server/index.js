@@ -1,7 +1,7 @@
 const ws = require("ws");
 
 ((ws)=>{
-    const server = new ws.Server({host:"10.131.133.207",port:8000});
+    const server = new ws.Server({host:"localhost",port:8080});
 
     const Init = ()=>{
         bindEvent();
