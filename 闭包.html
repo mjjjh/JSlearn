@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function f1(){
+        //     var a = 1;
+        //     function f2(){
+        //         a = 2;
+        //     }
+        //     f2();
+        //     console.dir(f2);
+
+        //     return a;
+        // }
+        // var f = f1();
+        // console.log(f1);
+        // console.dir(f);
+
+        // function f1(){
+        //     console.log(arguments);
+        //     return ;
+        // }
+        // function f2(a){
+        //     console.log(a);
+        // }
+        // console.log(f1(1,2,3,4)) ;
+        
+        // var a = 1;
+        // var obj = {
+        //     a :2,
+        //     fn:function (){
+        //         console.log(this.a);
+        //     }
+        // };
+        // (obj.fn)();
+        // (1,obj.fn)();
+        // ((num)=>{
+        //     console.log(num);
+        // })(1)
+        // var obj = {
+        //     0:'a',
+        //     1:'b',
+        //     2:'c',
+        //     length:3
+        // }
+        // var result = [].slice.call(obj,2);
+        // console.log(result);
+        // [].slice.apply() 
+
+
+        var obj = {
+            bar:1,
+            fn:function(param){
+                // function fn2(){
+                //     console.log(this);
+                //     console.log(this.bar);
+                // }
+                // fn2.apply(this);
+                console.log(param);
+                console.log(this);
+            }
+        }
+        function preInvoke(args){
+            obj.fn.call(obj,args)
+        }
+        function handle(callback){
+            console.log([].slice.call(arguments,1));
+            var args = [].slice.call(arguments,1);
+            callback(args);
+        }
+        handle(preInvoke,'a','b','c')
+    </script>
+</body>
+</html>

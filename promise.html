@@ -1,0 +1,64 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <script>
+        console.log(window);
+    //     const promise = new Promise((resolve,reject)=>{
+    //         // setTimeout(() => {
+    //             reject("hello");
+    //             console.log("no");
+    //         // }, 1000);
+    //     })
+    //    const p2 = Promise.resolve(setTimeout(()=>{
+    //         console.log("p2");
+    //    },1000))
+
+    // promise.then((val)=>{
+    //     // new Promise((resolve,reject)=>{
+    //     //     setTimeout(()=>{
+    //             console.log(val);
+    //             //resolve
+    //             // resolve("world");
+    //         // },1000);
+    //     // })
+    // },err=>console.log(err)).then(val =>{
+    //     // setTimeout(()=>{
+    //         console.log("111" + val);
+    //         //resolve
+    // //    })
+        
+    // },err=>console.log(err)).catch(err=>console.log(err))
+        
+    //     console.log(3);
+        function fn1()
+        {
+            return new Promise((resolved,reject)=>{
+                setTimeout(()=>{
+                    resolved(2);
+                },1000)
+            }).then((val) =>{
+                return new Promise((resolved,reject)=>{
+                    setTimeout(()=>{
+                        resolved(3);
+                    },1000)
+                })
+            })
+        }
+        async function fn()
+        {
+            console.log(1);
+            const res = await fn1();
+            console.log(res);
+            console.log(4);
+        }
+        fn();
+        console.log(5);
+    </script>
+    
+ </body>
+ </html>

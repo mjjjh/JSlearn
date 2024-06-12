@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function Person(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+
+        // Person.prototype.haveone = function(){
+        //     console.log("显示原型获得");
+        // }
+
+        // var p1 = new Person("xiao",14);
+        // var p2 = new Person("da",19);
+        // // console.log(p1);
+        // // console.dir(p2);
+        // // p1.haveone();
+
+        // function fc(){
+
+        // }
+        // console.dir(fc);
+        // Function.prototype.abc = "abc";
+        // console.dir(fc);
+        
+        
+
+        // console.log(p1.__proto__);
+        
+        /* 
+            JS规定，所有对象都有自己的显式原型对象，函数也是对象，所以也不例外，
+            函数实际是由构造函数Function实例化而来
+            所有对象都继承Object.prototype的属性
+        */
+
+        function Fn(){
+
+        }
+        var fn1 = new Fn;
+        console.log(fn1.__proto__ === Fn.prototype);    //true
+        console.log(Fn.__proto__ === Function.prototype);   //true
+        console.dir(Function.prototype.__proto__ === Object.prototype); //true
+        console.log(Fn.prototype.__proto__ === Object.prototype);   //true
+
+        var ob1 = new Object();
+        console.log(ob1.__proto__ === Object.prototype);    //true
+        console.log(Object.prototype.__proto__);    //null
+
+
+        //Object.getPrototypeOf()可获得对象原型
+        console.dir(Object.getPrototypeOf(Function));
+    </script>
+</body>
+</html>

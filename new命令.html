@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            new命令
+            1.创建一个空对象
+            2.将空对象的原型指向构造函数的prototype
+            3.将构造函数的this指向空对象
+            4.执行构造函数并返回空对象
+        */
+       function Pa(name,age){
+            this.name = name;
+            this.age = age;
+       }
+       function _new(){
+            var ags = Array.prototype.slice.call(arguments);
+            var myConstructor = ags.shift();
+            // 1.原型指向通过Object.creat()实现
+            var obj = Object.create(Pa.prototype);
+            //2.改变指向并加入参数调用
+            var result = myConstructor.apply(obj,ags);
+            // 3.返回（需要判断）构造函数有返回内部对象，则return result
+            return (typeof(result) === "object") ? result : obj;
+
+       }
+
+       var p1 = _new(Pa,"xiaom",17);
+       var p2 = new Pa("na",20);
+       console.dir(p1);
+       console.dir(p2);
+       console.log(Object.getPrototypeOf(p1) === Pa.prototype);
+    </script>
+</body>
+</html>
