@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            sort支持回调函数 : 函数参数arg1在arg2后面
+                              函数返回正数，arg1和arg2位置不变-------从小到大 arg1 - arg2 
+                              函数返回负数，arg1和arg2位置交换-------从大到小 arg2 - arg1
+        */
+        var arr = [2,4,1,3,5,7,8,,9];
+        var result = arr.sort((arg1,arg2)=>{
+            return arg1 - arg2; //从小到大
+            // return arg2 - arg1; //从大到小
+        })
+        console.log(result);
+
+
+
+        /* 
+            forEach使用
+            没有返回值
+            不会修改原数组
+        */
+
+
+        //箭头函数没有自己的 this 上下文，它们捕获其定义时的 this 值。
+        //这意味着，即使你在 forEach 中提供了 thisArg，箭头函数也不会使用它来绑定 this。
+        //箭头函数的 this 值在定义时就已经确定，并且是不可变的。
+        arr.forEach((elem,index,arr)=>{
+        //    console.log(this);   //window
+            console.log(elem);
+        },arr);
+        console.log(arr);
+        
+        //遍历arr数组,没有元素则undefined
+        arr2 = Array.apply(null,arr);
+        console.log(arr2[-1]);
+        arr3 = [...arr];
+        arr3.forEach((ele)=>{
+            console.log(ele);
+        })
+
+        /* 
+            map使用 
+            映射
+            有返回值,返回的是自定的值
+            不会修改原数组
+            跳空位,不跳undefined和null
+            console.log(Array.apply(null,arr));
+        */
+        var arr4 = ['a','b','c','d'];
+        var arr5 = [1,2];
+        var arr6 = arr5.map(function(elem){
+            // console.log(this);
+            return this[elem];
+        },arr4)
+        console.log(arr6);
+        console.log(arr4.map((elem)=>elem % 2 === 0));
+
+
+
+        /* 
+            filter 过滤
+            有返回值,返回的是满足条件的数组值
+            不会修改原数组
+            跳空位,不跳undefined和null
+        */
+       //偶数的数组值
+       var arr7 = arr.filter((elem)=>elem % 2 === 0);
+       console.log(arr7);
+        var a = new Boolean(false)
+       console.log(a.toString());
+
+
+
+
+
+        /* 
+            some   || 
+            需要返回值,返回bool类型
+            判断数组中的某个元素是否符合回调函数当中的条件
+            只要有一个满足(返回值为true),遍历结束
+            不会修改原数组
+            跳空位,不跳undefined和null
+
+            every  && 
+            类似some,但需要数组中全部满足条件
+
+            []
+            对于空数组,some和every不会执行回调函数
+            但是some固定返回false,every固定返回true
+
+        */
+        var arr8 = arr.some(function(elem){
+            return elem === 1;
+        })
+        console.log(arr8);
+
+
+
+
+        
+        /* 
+            redeuce : 归纳 从前往后
+            需要返回值
+            不会修改原数组
+            跳空位,不跳undefined和null
+
+            参数1:回调函数
+                    函数参数:
+                        accumulator(累计器),初始默认以数组索引0的值为结果
+                        currentValue(当前值),以为默认初始索引从0开始,因此默认从索引1开始
+                        index(索引)(可选)
+                        arr(原数组)(可选)
+            参数2:初始值,设置了遍历次数加1
+
+
+
+            reduceRight :从后往前 
+        */
+        var arr9 = arr.reduce(function(acc,cur){
+            return acc + cur;
+        })
+        console.log(arr9);
+
+
+        var obj = {
+            name:"Xiao",
+            age:18,
+            hobby:{
+                first:"ball",
+                second:"game"
+            }
+        }
+        var hob = "hobby.second".split('.').reduce((acc,cur)=>{
+            if(acc) return acc[cur];
+        },obj)
+        console.log(hob);
+
+
+
+
+
+        /* 
+            1.按分数从高到低排序
+            2.获取nan同学的总分数
+            3.获取高于90分,且差值最小的同学的信息
+            4.获取分数高于90分的所有同学信息组成的数组
+            5.去掉重复的同学信息
+        */
+        
+        var student = [
+            {name:'a',sex:'nan',score:75},
+            {name:'b',sex:'nan',score:79},
+            {name:'c',sex:'nv',score:93},
+            {name:'d',sex:'nan',score:81},
+            {name:'e',sex:'nv',score:71},
+            {name:'f',sex:'nan',score:97},
+            {name:'g',sex:'nan',score:89},
+            {name:'e',sex:'nv',score:71},
+            {name:'h',sex:'nv',score:96},
+            {name:'i',sex:'nv',score:76},
+            {name:'j',sex:'nan',score:86},
+        ]
+
+
+    </script>
+</body>
+</html>
