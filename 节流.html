@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background:red;
+        }
+    </style>
+    <div id="box"></div>
+    <script>
+        /* 
+            节流：（节省流量，降低请求、调用等的次数）
+                scroll —— 下拉请求
+                mousemove —— 鼠标移动
+        */
+
+        //实现节流功能
+        //鼠标移动
+        var box = document.querySelector('#box');
+        box.addEventListener('mousemove',throttle2(fn,1000,'a',[],{}));
+
+        function fn(){
+            console.log(arguments);
+            console.log(this);
+        }
+
+        function throttle(fn,delay){
+            var arr = [].slice.call(arguments,2);
+            var timer = null;
+            //间隔delay秒才能执行内部函数
+            return function(e){
+                if(!timer){
+                    var that = this;
+                    timer = setTimeout(()=>{
+                        fn.apply(that,[e,...arr]);
+                        timer = null;
+                    },delay)
+                }
+            }
+        }
+
+
+        //Date实现的节流函数
+        function throttle2(fn,delay){
+            var last = Date.now();
+            var arr = [].slice.call(arguments,2);
+            return function(e){
+                if(Date.now() > last + delay){
+                    fn.apply(this,[e,...arr]);
+                    last = Date.now();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <script>
+        /* 
+            防抖（不停止不触发）
+             减少函数调用间隔
+
+             例子：对于input输入监听函数不需要频繁触发,可以使用定时器增加触发间隔
+             作用：防止频繁触发函数调用，提高性能
+        */
+        var txt = document.querySelector("#txt");
+        // var timer;
+        // txt.addEventListener('input',function(){
+        //     clearTimeout(timer);
+        //     var that = this;
+        //     timer = setTimeout(()=>{
+        //         console.log(that.value);
+        //     },2000);
+        // })
+        //直接是函数调用
+        txt.addEventListener('input',debouce(fn,500,"a",[],{}));
+        function fn(){
+            console.log(this);
+            console.log(arguments);
+        }
+        //返回函数
+        function debouce(fn,delay){
+            //传参
+            var arr = Array.prototype.filter.call(arguments,(item,index)=>index > 1);
+            var timer = null;
+            return function(){
+                // this指向txt元素
+                clearTimeout(timer);
+                var that = this;
+                timer = setTimeout(function(){
+                    fn.apply(that,arr);
+                },delay)
+            }
+        }
+
+        // var obj = {     
+        //     fs : function(){
+        //             console.log(this);
+        //             return function(){
+        //                 console.log(this);
+        //             }
+        //         }
+        // }
+        // var obj2 = {
+        //     fs2 : obj.fs()
+        // }
+        // obj2.fs2();
+    </script>
+</body>
+</html>

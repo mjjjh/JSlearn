@@ -11,6 +11,7 @@
             sort支持回调函数 : 函数参数arg1在arg2后面
                               函数返回正数，arg1和arg2位置不变-------从小到大 arg1 - arg2 
                               函数返回负数，arg1和arg2位置交换-------从大到小 arg2 - arg1
+            会改变原数组
         */
         var arr = [2,4,1,3,5,7,8,,9];
         var result = arr.sort((arg1,arg2)=>{
@@ -18,7 +19,6 @@
             // return arg2 - arg1; //从大到小
         })
         console.log(result);
-
 
 
         /* 
@@ -153,7 +153,6 @@
             4.获取分数高于90分的所有同学信息组成的数组
             5.去掉重复的同学信息
         */
-        
         var student = [
             {name:'a',sex:'nan',score:75},
             {name:'b',sex:'nan',score:79},
@@ -168,7 +167,42 @@
             {name:'j',sex:'nan',score:86},
         ]
 
+        result1 = student.sort(function(itemL,itemF){
+            return itemF.score - itemL.score;
+        })
+        console.log(result1);
+        
+        result2 = student.reduce((acc,item)=>{
+            if(item.sex === "nan")
+                return acc + item.score;
+            return acc;
+        },0)
+        result2_2 = student.filter((item)=>item.sex === "nan").reduce((acc,item)=>acc + item.score,0);
+        console.log(result2,result2_2);
 
+        result3 = student.filter(item => item.score > 90).sort((itemL,itemF) => itemL.score - itemF.score)[0];
+        console.log(result3);
+
+        result4 = student.filter(item => item.score > 90);
+        console.log(result4);
+
+        result5 = student.reduce((acc,item)=>{
+            if(acc.some((item1)=> JSON.stringify(item) === JSON.stringify(item1))) return acc;
+            acc.push(item);
+            return acc;
+        },[]);
+        //需要辅助数组seen来存储已经遍历过的对象的**字符串**表示
+        // result5_2 = student.filter((item,index,arr)=>arr.indexOf(item) === index);
+        console.log(result5);
+
+        var obj121 = {
+            undefined:undefined,
+            a:function(){
+                console.log(1);
+            }
+        };
+        //JSON.stringify方法在比较时会忽略函数和undefined值，并且会按照属性的顺序进行序列化。
+        console.log(JSON.stringify(obj121));
     </script>
 </body>
 </html>
