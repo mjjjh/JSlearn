@@ -49,6 +49,7 @@
 
         //Date实现的节流函数
         function throttle2(fn,delay){
+            console.log(this);  //window
             var last = Date.now();
             var arr = [].slice.call(arguments,2);
             return function(e){

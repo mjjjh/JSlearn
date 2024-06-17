@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn2">json-server</button>
+    <button id="btn1">baidu</button>
+    <script>
+        var hanleBtn1 = document.querySelector("#btn1");
+        var hanleBtn2 = document.querySelector("#btn2");
+
+        hanleBtn1.addEventListener("click",()=>{
+            var xhr = new XMLHttpRequest();
+            xhr.open("get","www.baidu.com");
+            xhr.onload = ()=>{
+                console.log(xhr.status);
+            }
+            xhr.send();
+        })
+
+        hanleBtn2.addEventListener("click",()=>{
+            var xhr = new XMLHttpRequest();
+            xhr.open("get","http://localhost:3000/posts");
+            xhr.onload = ()=>{
+                console.log(xhr.status);
+            }
+            xhr.send();
+        })
+
+    </script>
+</body>
+</html>

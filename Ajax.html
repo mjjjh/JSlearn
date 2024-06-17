@@ -6,6 +6,105 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="get">get</button>
+    <button id="post">post</button>
+    <button id="put">put</button>
+    <button id="delete">delete</button>
+
+    <script>
+        /* 
+        实例属性：
+            readyState
+            onreadystatechange
+            response
+            responseType：如果是空字符串，等同于text，文本。表示服务器返回的是普通文本。
+                            可写的，如果设置为json，浏览器会自动把响应的数据放到JSON.parse()中进行转换，得到json对象
+            responseText： 如果是字符串类型，有这个值
+            status
+            statusText
+            timeout
+
+        实例方法
+            open():用于指定http请求参数
+                method：请求方式
+                url：请求地址
+                async：布尔值，是否为异步请求，默认为true
+
+
+            send()：用于实际发出http请求
+                参数可选
+                参数：请求体
+
+            setRequestHeader()
+
+            getResponseHeader()
+
+            getAllResponseHeaders()
+
+        实例事件
+            onreadystatechange：readyState属性值变化便会触发
+            onload：readyState已经变成4触发
+            ontimeout：一旦过了timeout属性所设置的时间，就会触发
+            onerror：发生错误触发
+
+            readyState返回一个整数，表示实例对象的当前状态。该属性只读
+                0：初始
+                1：open()之后
+                2：send()之后
+                3：请求中
+                4：请求完成
+        */
+
+        var getBtn = document.querySelector("#get");
+        var postBtn = document.querySelector("#post");
+        var putBtn = document.querySelector("#put");
+        var deleteBtn = document.querySelector("#delete");
+
+        //1.实例化XMLHttpRequest对象
+        var xhr = new XMLHttpRequest();
+        
+        //get请求获取数据
+        getBtn.addEventListener("click",function(){
+            //2.建立http连接
+            xhr.open('GET','http://localhost:3000/posts');
     
+            //4.接收服务器响应回来的数据，回调函数
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){ //请求完成
+                    if(xhr.status === 200)  //status状态码
+                    // console.log(xhr.statusText);
+                    console.log(xhr.response);
+                }
+            }
+    
+            //3.实际发送请求
+            xhr.send();
+        })
+
+        //post请求添加数据
+        postBtn.addEventListener("click",function(){
+            xhr.open("post","http://localhost:3000/posts");
+            xhr.onload = function(){
+                console.log(xhr.status,xhr.statusText);
+            }
+
+            var data = { "id": "3", "title": "a title", "views": 300 };
+            xhr.setRequestHeader('Content-Type','application/json');
+            xhr.send(JSON.stringify(data));
+        })
+
+        //put请求修改数据
+        putBtn.addEventListener("click",function(){
+            xhr.open("put","http://localhost:3000/posts/1");
+            xhr.onload = function(){
+                console.log(xhr.status,xhr.statusText);
+            }
+
+            var data = { "title": "a title1111", "views": 300 };
+            xhr.setRequestHeader('Content-Type','application/json');
+            xhr.send(JSON.stringify(data));
+        })
+
+    </script>
 </body>
 </html>
