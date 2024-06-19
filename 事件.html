@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        .item{
+            width: 40px;
+            height: 40px;
+            margin:auto;
+            background: yellow;
+        }
+    </style>
+    <div class="box">
+        <div class="item">
+
+        </div>
+    </div>
+    <script>
+        /* 
+        鼠标事件：MouseEvent / PointerEvent（h5）
+            mousedown：鼠标按下
+            mouseup：鼠标抬起
+            click：左键点击一次
+            dblclick：双击
+            mousermove：鼠标移动
+            
+            mouseenter：鼠标从外部进入一个节点触发。 不冒泡
+            mouseover：鼠标从内外进入一个节点触发。 冒泡
+
+            mouserleave：鼠标离开一个节点触发。 不冒泡
+            mouseout：鼠标从内外离开一个节点或子节点触发。 冒泡
+
+
+            //背景的分布
+            background-clip：content-box | border-box | padding-box
+        */
+
+        const box = document.querySelector(".box");
+        const item = document.querySelector(".item");
+
+        box.addEventListener("mousedown",()=>{
+            console.log("mouseover");
+        })
+    </script>
+
+    <script>
+        /* 
+        键盘事件
+            keydown：按下
+            keyup：松开
+            keypress：按下有值的键触发。ctrl、alt、shift、win等不会触发。
+                    对于有值的键，按下先触发keydown在触发keypress
+        */
+
+    </script>
+
+
+</body>
+</html>

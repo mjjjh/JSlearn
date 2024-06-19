@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            var没有块级作用域，有函数作用域
+            let新增有块级作用域if,for
+            块级作用域的出现，使得广泛应用的匿名立即执行函数不在需要
+
+            let不存在变量提升
+
+            const作用和let同，但是只读
+            const 对象是一个地址
+        */
+       //for() 条件语句这里有个父作用域
+        for(let i = 0;i < 3;i++){
+            //这里子作用域
+            let i = 'abc';  //let不允许在用一个作用域重复声明同一变量
+                            //这里没报错说明，两个不在同一作用域
+        }
+    </script>
+</body>
+</html>
