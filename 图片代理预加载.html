@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" alt="">
+    <button>加载</button>
+
+   <script>
+        const btn = document.querySelector('button');
+        
+        btn.onclick = function(){
+            let myImage = (function(){
+                const imgNode = document.querySelector('img');
+                return {
+                    setsrc:function(src){
+                        imgNode.src = src;
+                    }
+                }
+            })();
+            let proxyImage = (function(){
+                let img = new Image;
+                console.log(1,img);
+                //加载完成后再放入
+                img.onload = function(){
+                    // console.log(this);
+                    myImage.setsrc(this.src)
+                }
+                return {
+                    setsrc:function(src){
+                        myImage.setsrc('./DESIGN1.png');
+                        console.log(2);
+                        //img是闭包，和上面的img同一个，src属性被设置了
+                        img.src = src;
+                    }
+                }
+            })();
+            // console.log(proxyImage);
+            proxyImage.setsrc('./111111.png');
+        }
+        
+   </script> 
+</body>
+</html>
