@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" name="" id="input">
+
+    <div id="show">
+    </div>
+
+    <script>
+        const input = document.querySelector('#input');
+        const box = document.querySelector("#show");
+
+        function effects(fn){
+            cb = fn;
+            fn();
+            cb = null;
+        }
+
+        let cb = null;
+        const handler = new set();
+        const text = {
+            _value:null,
+            get value(){
+                if(cb)
+                    handler.add(cb);
+                return this._value;
+            },
+            set value(val){
+                this._value = val;
+                handler.forEach(cb => cb());
+            }
+        }
+
+        const effect = () => {
+            box.innerHTML = text.value;
+        }
+        effects(effect);
+
+        input.addEventListener('input',(e) => {
+            text.value = e.target.value;
+        })
+    </script>
+
+</body>
+</html>

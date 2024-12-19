@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .left {
+            height: 80vh;
+            width: 20%;
+            background-color: red;
+        }
+        .btnCount {
+            display: flex;
+            .front,span {
+                display: none;
+            }
+        }
+        .active {
+            .front,span {
+                display: flex;
+            }
+        }
+        .car {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+        }
+        .animate {  
+            animation: animateCar 500ms ease-in-out;
+        }
+
+        @keyframes animateCar {
+            0% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(0.8);
+            }
+            50% {
+                transform: scale(1);
+            }
+            75% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .toA {
+            .front {
+                display: none;
+            }
+            span {
+                display: initial;
+            };
+        }
+        .activeA {
+            .front {
+                display: initial;
+                background-color: green;
+            }
+            span {
+                display: none;
+            };
+        }
+
+        .add-to-car {
+            position: fixed;
+            z-index: 9;
+            left: 0;
+            top: 0;
+            transition: 0.8s linear;
+            .icon {
+                position: absolute;
+                transition: 0.8s cubic-bezier(0.5,-0.5,1,1);
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div style="display: flex;">
+        <div class="left"></div>
+        <main style="width: 40%;">
+            <div style="height: 100px;display: flex;">
+                <!-- <div> -->
+                    <img style="height: 100%;  object-fit: cover;" src="./assets/g1.png" alt="">
+                <!-- </div> -->
+                <div>
+                    <title>咖啡</title>
+                    <div class="info">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, possimus.
+                    </div>
+                    <div style="display: flex;justify-content: space-between;">
+
+                        <div>32</div>
+                        <div class="btnCount">
+                            <div class="front">-</div>
+                            <span>0</span>
+                            <div>+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <div class="car"></div>
+        <div class="money">0.00</div>
+        <div class="toA">
+            <div class="front">去结算</div>
+            <span>还差￥0元起送</span>
+        </div>
+        <div class="num">0</div>
+       
+    </footer>
+    <script src="./data.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+            position: fixed;
+            left: 0;
+            right: 0;
+        }
+
+        .outer .inner {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <ul></ul>
+    <button onclick="trans()">click</button>
+    <div class="outer">
+        <i class="inner">a</i>
+    </div>
+    <script>
+        const doms = {
+            ouetr: document.querySelector('.outer'),
+            inner: document.querySelector('.inner')
+        };
+        function trans(){
+            console.log(doms.ouetr);
+            
+            doms.ouetr.style.transform = `translateX(100px)`
+            doms.inner.style.transform = `translateY(100px)`
+        }
+        // const url = 'https://lyrics.net.cn/lyrics/27606'
+
+        // async function getLrc(url){
+        //     const res = await fetch(url);
+        //     console.log(res);
+        // }
+
+        // getLrc(url);
+    </script>
+</body>
+</html>
